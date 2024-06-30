@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
-import { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { searchUsers, validUser } from '../apis/auth'
 import { setActiveUser } from '../redux/activeUserSlice'
-import { RiNotificationBadgeFill } from "react-icons/ri"
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import { BsSearch } from "react-icons/bs"
 import { BiNotification } from "react-icons/bi"
 import { IoIosArrowDown } from "react-icons/io"
@@ -17,10 +17,8 @@ import { getSender } from '../utils/logics'
 import { setActiveChat } from '../redux/chatsSlice'
 import Group from '../components/Group'
 import Contacts from '../components/Contacts'
-import { Effect } from "react-notification-badge"
-// import NotificationBadge from 'react-notification-badge/lib/components/NotificationBadge';
-import NotificationBadge from 'react-notification-badge';
 import Search from '../components/group/Search'
+
 function Home() {
   const dispatch = useDispatch()
   const { showProfile, showNotifications } = useSelector((state) => state.profile)
@@ -67,7 +65,7 @@ function Home() {
 
   return (
     <>
-
+      <ToastContainer />
       <div className="bg-[#282C35!] scrollbar-hide z-10 h-[100vh]  lg:w-[90%] lg:mx-auto overflow-y-hidden shadow-2xl">
 
         <div className='flex'>
@@ -84,15 +82,9 @@ function Home() {
                   </div>
                   <div className='absolute top-4 right-5 flex items-center gap-x-3'>
                     <button onClick={() => dispatch(setShowNotifications(!showNotifications))}>
-                      <NotificationBadge
-                        count={notifications.length}
-                        effect={Effect.SCALE}
-                        style={{ width: "15px", height: "15px", fontSize: "9px", padding: "4px 2px 2px 2px" }}
-                      />
                       {
-                        showNotifications ? <RiNotificationBadgeFill style={{ width: "25px", height: "25px", color: "#319268" }} /> : <BiNotification style={{ color: "#319268", width: "25px", height: "25px" }} />
+                        showNotifications ? <BiNotification style={{ width: "25px", height: "25px", color: "#319268" }} /> : <BiNotification style={{ color: "#319268", width: "25px", height: "25px" }} />
                       }
-
                     </button>
                     <div className={`${showNotifications ? "overflow-y-scroll scrollbar-hide tracking-wide absolute top-10 -left-32 z-10 w-[240px] bg-[#fafafa] px-4 py-2 shadow-2xl" : "hidden"}`}>
                       <div className='text-[13px]'>
@@ -105,14 +97,12 @@ function Home() {
                             <div onClick={() => {
                               dispatch(setActiveChat(e.chatId))
                               dispatch(setNotifications(notifications.filter((data) => data !== e)))
-
+                              toast.info(`New message from ${getSender(activeUser, e.chatId.users)}`);
                             }} key={index} className='text-[12.5px] text-black px-2 cursor-pointer' >
 
                               {e.chatId.isGroup ? `New Message in ${e.chatId.chatName}` : `New Message from ${getSender(activeUser, e.chatId.users)}`}
                             </div>
-
                           )
-
                         })
                       }
                     </div>
@@ -143,23 +133,15 @@ function Home() {
                     </div>
                   </div>
 
-
                   <Contacts />
 
-
                 </div>
-
 
               </div> : <Profile className="min-w-[100%] sm:min-w-[360px] h-[100vh] bg-[#fafafa] shodow-xl relative" />
           }
           <Chat className="chat-page relative lg:w-[100%] h-[100vh] bg-[#fafafa]" />
-
-
-
-
         </div>
-      </div >
-
+      </div>
     </>
   )
 }
