@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/rahulbhuse16/lets-chat.git/static/css/main.269a34df.css",
+    "main.js": "/rahulbhuse16/lets-chat.git/static/js/main.1a85a0fd.js",
+    "static/js/845.ba26655f.chunk.js": "/rahulbhuse16/lets-chat.git/static/js/845.ba26655f.chunk.js",
+    "static/media/no-contacts.jpg": "/rahulbhuse16/lets-chat.git/static/media/no-contacts.8cf94752ad10451d6e26.jpg",
+    "index.html": "/rahulbhuse16/lets-chat.git/index.html",
+    "main.269a34df.css.map": "/rahulbhuse16/lets-chat.git/static/css/main.269a34df.css.map",
+    "main.1a85a0fd.js.map": "/rahulbhuse16/lets-chat.git/static/js/main.1a85a0fd.js.map",
+    "845.ba26655f.chunk.js.map": "/rahulbhuse16/lets-chat.git/static/js/845.ba26655f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.269a34df.css",
+    "static/js/main.1a85a0fd.js"
+  ]
+}
